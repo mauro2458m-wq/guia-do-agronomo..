@@ -1,10 +1,6 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import type { CropInfo } from '../types';
 
-// A chave da API é fornecida pelo ambiente de execução.
-// O cliente GoogleGenAI é inicializado diretamente, assumindo que a chave API está presente.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 const cropInfoSchema = {
   type: Type.OBJECT,
   properties: {
@@ -112,6 +108,10 @@ const cropInfoSchema = {
 
 
 export const fetchCropInfo = async (cropName: string): Promise<CropInfo> => {
+  // Inicializa o cliente GoogleGenAI aqui para evitar falhas no carregamento inicial
+  // se a chave de API não estiver disponível imediatamente.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
   const prompt = `Aja como um agrônomo especialista. Para a cultura de '${cropName}', forneça uma lista das 3 pragas mais comuns (classificando cada uma em uma categoria como 'Sugador', 'Mastigador' ou 'Perfurador', incluindo dicas de prevenção, e uma solução detalhada com o veneno recomendado e o modo de aplicação para cada praga), as 3 doenças mais comuns (incluindo critérios para alerta de detecção precoce e dicas de prevenção para cada uma), 3 recomendações de tratamento (classificando cada um como 'quimico' ou 'organico'), a época ideal de plantio e uma breve descrição das condições climáticas ideais. Retorne a resposta estritamente como um objeto JSON, seguindo o schema definido.`;
 
   try {
@@ -138,6 +138,6 @@ export const fetchCropInfo = async (cropName: string): Promise<CropInfo> => {
     if (error instanceof Error && (error.message.includes('API key not valid') || error.message.includes('API_KEY'))) {
       throw new Error('A chave da API é inválida ou não foi configurada corretamente no ambiente.');
     }
-    throw new Error('Não foi possível obter os dados da cultura. Tente novamente.');
+    throw new Error('Não foi possível obter os dados da cultura. Verifique a sua conexão ou a configuração da chave de API.');
   }
 };

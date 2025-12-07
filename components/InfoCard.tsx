@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import type { TreatmentType, Disease } from '../types';
 
@@ -173,18 +174,14 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, icon, items, cardType }) => 
     return null;
   }
   
-  // FIX: Switched to a more robust method for extracting unique pest categories
-  // to prevent potential TypeScript type inference issues. This approach uses `map`
-  // and `filter` with a type guard to guarantee `pestCategories` is a `string[]`.
+  // FIX: Replaced the `new Set()` implementation with a chain of `map` and `filter`
+  // calls to ensure correct type inference for `pestCategories` and prevent `unknown` type errors.
   const pestCategories =
     cardType === 'pragas'
-      ? [
-          ...new Set(
-            items
-              .map((item) => item.categoria)
-              .filter((category): category is string => typeof category === 'string')
-          ),
-        ]
+      ? items
+          .map((item) => item.categoria)
+          .filter((category): category is string => typeof category === 'string')
+          .filter((value, index, self) => self.indexOf(value) === index)
       : [];
 
   const filteredItems = (() => {

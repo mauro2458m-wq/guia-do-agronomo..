@@ -25,16 +25,6 @@ const MilhoIcon: React.FC<{ className?: string }> = ({ className }) => (
         React.createElement('path', { d: "M15 14L16 13", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round" })
     )
 );
-const SojaIcon: React.FC<{ className?: string }> = ({ className }) => (
-    React.createElement('svg', { className, viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
-        React.createElement('path', { d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }),
-        React.createElement('circle', { cx: "12", cy: "12", r: "3", stroke: "currentColor", strokeWidth: "1.5" }),
-        React.createElement('circle', { cx: "8", cy: "8", r: "1.5", fill: "currentColor", opacity: "0.5" }),
-        React.createElement('circle', { cx: "16", cy: "16", r: "1.5", fill: "currentColor", opacity: "0.5" }),
-        React.createElement('circle', { cx: "16", cy: "8", r: "1.5", fill: "currentColor", opacity: "0.5" }),
-        React.createElement('circle', { cx: "8", cy: "16", r: "1.5", fill: "currentColor", opacity: "0.5" })
-    )
-);
 const TomateIcon: React.FC<{ className?: string }> = ({ className }) => (
     React.createElement('svg', { className, viewBox: "0 0 24 24", fill: "none", xmlns: "http://www.w3.org/2000/svg" },
         React.createElement('circle', { cx: "12", cy: "14", r: "7", stroke: "currentColor", strokeWidth: "1.5" }),
@@ -112,14 +102,13 @@ export interface CropData {
 export const CROPS: CropData[] = [
   { name: 'Feijão', Icon: FeijaoIcon },
   { name: 'Quiabo', Icon: QuiaboIcon },
-  { name: 'Milho', Icon: MilhoIcon },
-  { name: 'Soja', Icon: SojaIcon },
-  { name: 'Tomate', Icon: TomateIcon },
   { name: 'Batata', Icon: BatataIcon },
-  { name: 'Limão', Icon: LimaoIcon },
-  { name: 'Couve', Icon: CouveIcon },
+  { name: 'Milho', Icon: MilhoIcon },
   { name: 'Laranja', Icon: LaranjaIcon },
+  { name: 'Maracujá', Icon: MaracujaIcon },
   { name: 'Mandioca', Icon: MandiocaIcon },
   { name: 'Coco', Icon: CocoIcon },
-  { name: 'Maracujá', Icon: MaracujaIcon },
+  { name: 'Limão', Icon: LimaoIcon },
+  { name: 'Couve', Icon: CouveIcon },
+  { name: 'Tomate', Icon: TomateIcon },
 ];

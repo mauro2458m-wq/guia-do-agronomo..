@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { TreatmentType, Disease } from '../types';
 
@@ -174,8 +173,6 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, icon, items, cardType }) => 
     return null;
   }
   
-  // FIX: Replaced the `new Set()` implementation with a chain of `map` and `filter`
-  // calls to ensure correct type inference for `pestCategories` and prevent `unknown` type errors.
   const pestCategories =
     cardType === 'pragas'
       ? items
@@ -239,7 +236,6 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, icon, items, cardType }) => 
             return (
               <div key={index} className="border-l-4 border-green-200 pl-4">
                 <div className="flex items-center space-x-2">
-                  {/* Fix: Use a `typeof` check to satisfy TypeScript's strict type checking for the 'item.categoria' property. */}
                   {cardType === 'pragas' && typeof item.categoria === 'string' && (
                     <div className="text-gray-500 flex-shrink-0">{getIconForPestCategory(item.categoria)}</div>
                   )}
